@@ -3,6 +3,7 @@ import FBFormItem from "./FBFormItem";
 import FBTextInput from "./FBTextInput";
 import FBCheckboxInput from "./FBCheckboxInput";
 import FBSelectInput from "./FBSelectInput";
+import FBTextArea from "./FBTextArea";
 
 const FieldBuilder = () => {
   return (
@@ -10,7 +11,7 @@ const FieldBuilder = () => {
       <div className="header font-bold text-highlight bg-highlight-light py-3 px-4">
         Field Builder
       </div>
-      <div className="content w-full flex flex-col py-8 px-8 gap-8">
+      <div className="content w-full flex flex-col py-8 px-12 gap-8">
         <FBFormItem label="Label">
           <FBTextInput placeholder="Sales Region" />
         </FBFormItem>
@@ -24,7 +25,7 @@ const FieldBuilder = () => {
         </FBFormItem>
 
         <FBFormItem label="Choices">
-          <FBSelectInput />
+          <FBTextArea />
         </FBFormItem>
 
         <FBFormItem label="Order">

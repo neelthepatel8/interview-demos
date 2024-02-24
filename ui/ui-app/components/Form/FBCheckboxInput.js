@@ -7,9 +7,9 @@ const FBCheckboxInput = ({ title, label }) => {
       <div className="flex flex-row items-center justify-normal gap-2">
         <input
           type="checkbox"
-          className="h-5 w-5 border border-gray-200 rounded text-transparent"
+          className="appearence-none h-5 w-5 border-2 rounded bg-primary cursor-pointer"
         />
-        {label && <label>{label}</label>}
+        {label && <label className="text-gray-600">{label}</label>}
       </div>
     </div>
   );
