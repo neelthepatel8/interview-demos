@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Label",
+    "type": "text",
+    "valueKey": "label",
+    "placeholder": "Sales Region"
+  },
+  {
+    "label": "Type",
+    "type": "checkbox",
+    "valueKey": "isMultiSelect",
+    "title": "Multi-select",
+    "checkboxLabel": "A Value is required"
+  },
+  {
+    "label": "Default Value",
+    "type": "text",
+    "valueKey": "default",
+    "placeholder": "Asia"
+  },
+  {
+    "label": "Choices",
+    "type": "textarea",
+    "valueKey": "choices"
+  },
+  {
+    "label": "Order",
+    "type": "select",
+    "valueKey": "order",
+    "options": ["Alphabetical", "Custom"]
+  }
+]

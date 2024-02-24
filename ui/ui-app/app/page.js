@@ -1,4 +1,4 @@
-import FieldBuilder from "@/components/Form/FieldBuilder";
+import FieldBuilder from "@/components/FieldBuilder";
 
 export default function Home() {
   return (

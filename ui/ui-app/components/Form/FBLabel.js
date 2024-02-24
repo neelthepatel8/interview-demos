@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
 
 const FBLabel = ({ text, className, ...props }) => {
-  
   const defaultClasses = "text-base";
   const combinedClassNames = `${defaultClasses} ${className}`;
 
@@ -9,7 +8,7 @@ const FBLabel = ({ text, className, ...props }) => {
     <div className={combinedClassNames} {...props}>
       {text}
     </div>
-  )
-}
+  );
+};
 
-export default FBLabel
+export default FBLabel;
