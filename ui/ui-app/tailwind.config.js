@@ -7,11 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         highlight: "#377D9F",
         "highlight-light": "#D9EDF7",
@@ -22,6 +17,7 @@ module.exports = {
         "highlight-border": "#DCDCDC",
         "primary-bg": "#FFFFFF",
         "primary-text": "#000000",
+        "loading-button": "#FFD700",
       },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],

@@ -2,31 +2,32 @@
   {
     "label": "Label",
     "type": "text",
-    "valueKey": "label",
+    "valuekey": "label",
     "placeholder": "Sales Region"
   },
   {
     "label": "Type",
     "type": "checkbox",
-    "valueKey": "isMultiSelect",
+    "valuekey": "required",
     "title": "Multi-select",
     "checkboxLabel": "A Value is required"
   },
   {
     "label": "Default Value",
     "type": "text",
-    "valueKey": "default",
+    "valuekey": "default",
     "placeholder": "Asia"
   },
   {
     "label": "Choices",
     "type": "textarea",
-    "valueKey": "choices"
+    "valuekey": "choices",
+    "override_classes": "!items-start"
   },
   {
     "label": "Order",
     "type": "select",
-    "valueKey": "order",
+    "valuekey": "order",
     "options": ["Alphabetical", "Custom"]
   }
 ]
