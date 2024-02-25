@@ -9,7 +9,7 @@ import { getComponentByType } from "@/utils/utils";
 import formConfig from "@/config/formConfig";
 import { BUTTON_STYLES } from "@/constants/styleConstants";
 import { useFormInput } from "@/hooks/useFormInput";
-import { scheduleNotifications } from "@/utils/utils";
+import { schedulealerts } from "@/utils/utils";
 
 const FieldBuilder = () => {
   const initialState = FieldService.getDefaults();
@@ -23,7 +23,7 @@ const FieldBuilder = () => {
     validateForm,
   ] = useFormInput(initialState, true);
 
-  const [notificationBar, setNotificationBar] = useState({
+  const [alertBar, setalertBar] = useState({
     show: false,
     message: "",
     styles: "",
@@ -31,7 +31,7 @@ const FieldBuilder = () => {
 
   useEffect(() => {
     if (errors.errorCount === 0) {
-      setNotificationBar(false);
+      setalertBar(false);
     }
   }, [errors]);
 
@@ -39,7 +39,7 @@ const FieldBuilder = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      setNotificationBar({
+      setalertBar({
         show: true,
         message: "The form still has some errors, please fix before saving.",
         styles: "bg-red-200 text-red-500",
@@ -47,7 +47,7 @@ const FieldBuilder = () => {
       return;
     }
 
-    const notifications = [];
+    const alerts = [];
 
     if (errors.errorCount === 0) {
       const defaultInChoices = state.choices.includes(state.default);
@@ -56,37 +56,37 @@ const FieldBuilder = () => {
         state.choices.length > 0 &&
         state.default !== ""
       ) {
-        notifications.push({
+        alerts.push({
           message: "Added default value to the choices list.",
           styles: "bg-blue-400 text-white",
-          delay: 2000,
+          delay: 750,
         });
       }
       if (state.displayAlpha == true && state.choices.length > 1) {
-        notifications.push({
+        alerts.push({
           message: "Sorted choices alphabetically.",
           styles: "bg-blue-400 text-white",
-          delay: 2000,
+          delay: 750,
         });
       }
 
       updateChoicesWithDefault();
       sortChoices();
 
-      notifications.push(
+      alerts.push(
         {
           message: "Saving Data...",
           styles: "bg-yellow-500 text-white",
-          delay: 2000,
+          delay: 750,
         },
         {
           message: "Data has been saved!",
           styles: "bg-green-500 text-white",
-          delay: 2000,
+          delay: 750,
         }
       );
 
-      scheduleNotifications(notifications, setNotificationBar);
+      schedulealerts(alerts, setalertBar);
 
       FieldService.saveField(state);
     }
@@ -100,7 +100,7 @@ const FieldBuilder = () => {
       )
     ) {
       handleReset();
-      setNotificationBar({ show: false });
+      setalertBar({ show: false });
     }
   };
 
@@ -113,11 +113,11 @@ const FieldBuilder = () => {
         Field Builder
       </div>
       <div className="content w-full flex flex-col py-8 px-12 gap-8 text-base">
-        {notificationBar.show && (
+        {alertBar.show && (
           <div
-            className={`w-full text-md py-2 px-5 rounded ${notificationBar.styles}`}
+            className={`w-full text-md py-2 px-5 rounded ${alertBar.styles}`}
           >
-            {notificationBar.message}
+            {alertBar.message}
           </div>
         )}
         {formConfig.map((item) => {

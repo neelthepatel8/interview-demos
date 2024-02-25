@@ -12,13 +12,13 @@ export const getComponentByType = (type) => {
   return componentMap[type] || FBTextInput;
 };
 
-export const scheduleNotifications = (notifications, setNotificationBar) => {
+export const schedulealerts = (alerts, setalertBar) => {
   let cumulativeDelay = 0;
 
-  notifications.forEach(({ message, styles, delay }) => {
+  alerts.forEach(({ message, styles, delay }) => {
     cumulativeDelay += delay;
     setTimeout(() => {
-      setNotificationBar({
+      setalertBar({
         show: true,
         message,
         styles,
