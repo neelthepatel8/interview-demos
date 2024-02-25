@@ -1,7 +1,7 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { REDUCER_ACTIONS } from "./hookConstants";
 import { validateInput } from "@/validations/validateInput";
-import { getCookie, setCookie } from "@/utils/utils";
+import { useCookies } from "@/hooks/useCookies";
 
 function formReducer(state, action) {
   switch (action.type) {
@@ -30,8 +30,26 @@ function formReducer(state, action) {
   }
 }
 export const useFormInput = (initialState, validate) => {
-  const [state, dispatch] = useReducer(formReducer, initialState);
+  const { get: getCookie, set: setCookie } = useCookies();
+  const initialStateFromCookies = Object.keys(initialState).reduce(
+    (accum, key) => {
+      const cookieValue = getCookie(key);
+      accum[key] = cookieValue ? JSON.parse(cookieValue) : initialState[key];
+      return accum;
+    },
+    {}
+  );
+
+  const [state, dispatch] = useReducer(formReducer, initialStateFromCookies);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      Object.keys(state).forEach((key) => {
+        setCookie(key, JSON.stringify(state[key]), 7);
+      });
+    }
+  }, [state, setCookie]);
 
   const handleFieldChange = (field, value) => {
     dispatch({ type: REDUCER_ACTIONS.UPDATE_FIELD, field, value });

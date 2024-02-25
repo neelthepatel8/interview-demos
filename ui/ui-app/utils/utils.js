@@ -1,4 +1,3 @@
-import React from "react";
 import FBTextInput from "../components/Form/FBTextInput";
 import FBCheckboxInput from "../components/Form/FBCheckboxInput";
 import FBTextArea from "../components/Form/FBTextArea";
