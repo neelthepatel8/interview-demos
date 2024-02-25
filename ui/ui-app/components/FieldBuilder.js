@@ -9,32 +9,87 @@ import { getComponentByType } from "@/utils/utils";
 import formConfig from "@/config/formConfig";
 import { BUTTON_STYLES } from "@/constants/styleConstants";
 import { useFormInput } from "@/hooks/useFormInput";
+import { scheduleNotifications } from "@/utils/utils";
 
 const FieldBuilder = () => {
   const initialState = FieldService.getDefaults();
-  const [state, handleFieldChange, handleReset, errors] = useFormInput(
-    initialState,
-    true
-  );
-  const [topErrorBar, setTopErrorBar] = useState(false);
+  const [
+    state,
+    handleFieldChange,
+    handleReset,
+    errors,
+    updateChoicesWithDefault,
+    sortChoices,
+    validateForm,
+  ] = useFormInput(initialState, true);
+
+  const [notificationBar, setNotificationBar] = useState({
+    show: false,
+    message: "",
+    styles: "",
+  });
 
   useEffect(() => {
     if (errors.errorCount === 0) {
-      setTopErrorBar(false);
+      setNotificationBar(false);
     }
   }, [errors]);
 
   const handleSave = (e) => {
     e.preventDefault();
 
+    validateForm();
+
+    const notifications = [];
+
     if (errors.errorCount === 0) {
-      const data = JSON.stringify(state);
-      console.log("Saving data...");
-      console.log(state);
+      const defaultInChoices = state.choices.includes(state.default);
+      if (
+        !defaultInChoices &&
+        state.choices.length > 0 &&
+        state.default !== ""
+      ) {
+        notifications.push({
+          message: "Added default value to the choices list.",
+          styles: "bg-blue-400 text-white",
+          delay: 3000,
+        });
+      }
+      if (state.displayAlpha == true && state.choices.length > 1) {
+        notifications.push({
+          message: "Sorted choices alphabetically.",
+          styles: "bg-blue-400 text-white",
+          delay: 3000,
+        });
+      }
+
+      updateChoicesWithDefault();
+      sortChoices();
+
+      notifications.push(
+        {
+          message: "Saving Data...",
+          styles: "bg-yellow-500 text-white",
+          delay: 3000,
+        },
+        {
+          message: "Data has been saved!",
+          styles: "bg-green-500 text-white",
+          delay: 3000,
+        }
+      );
+
+      scheduleNotifications(notifications, setNotificationBar);
+
+      FieldService.saveField(state);
       return;
     }
 
-    setTopErrorBar(true);
+    setNotificationBar({
+      show: true,
+      message: "The form still has some errors, please fix before saving.",
+      styles: "bg-red-200 text-red-500",
+    });
   };
 
   const handleCancel = (e) => {
@@ -45,6 +100,7 @@ const FieldBuilder = () => {
       )
     ) {
       handleReset();
+      setNotificationBar({ show: false });
     }
   };
 
@@ -57,9 +113,11 @@ const FieldBuilder = () => {
         Field Builder
       </div>
       <div className="content w-full flex flex-col py-8 px-12 gap-8 text-base">
-        {topErrorBar && (
-          <div className="w-full text-cancel-button bg-red-100 text-md py-2 px-5 rounded">
-            The form still has some errors, please fix before saving.
+        {notificationBar.show && (
+          <div
+            className={`w-full text-md py-2 px-5 rounded ${notificationBar.styles}`}
+          >
+            {notificationBar.message}
           </div>
         )}
         {formConfig.map((item) => {
@@ -92,10 +150,10 @@ const FieldBuilder = () => {
                 label={item.label}
                 key={item.valuekey}
                 className={item.override_classes || ""}
-                error={errors[item.valuekey]?.message}
+                error={errors[item.valuekey]}
               >
                 <InputComponent
-                  iserror={errors[item.valuekey]?.message}
+                  iserror={errors[item.valuekey]?.length > 0}
                   key={item.valuekey}
                   value={state[item.valuekey]}
                   onChange={handleChange}
