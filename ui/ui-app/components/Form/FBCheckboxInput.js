@@ -16,12 +16,14 @@ const FBCheckboxInput = ({
           checked={value || false}
           onChange={(e) => onChange(e)}
           type="checkbox"
-          className={`appearanace-none h-5 w-5 border-2 rounded cursor-pointer ${
-            value ? "bg-blue-500" : "bg-transparent"
+          className={` appearance-none h-5 w-5 border dark:border-0 dark:drop-shadow-2xl dark:bg-dark-bg rounded cursor-pointer  ${
+            value ? "bg-blue-500 " : "bg-transparent"
           }`}
         />
         {checkboxLabel && (
-          <label className="text-gray-600">{checkboxLabel}</label>
+          <label className="text-gray-600 dark:text-dark-text">
+            {checkboxLabel}
+          </label>
         )}
       </div>
     </div>

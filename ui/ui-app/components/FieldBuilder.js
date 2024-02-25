@@ -107,9 +107,9 @@ const FieldBuilder = () => {
   return (
     <form
       onSubmit={handleSave}
-      className="w-1/3 h-fit rounded-lg overflow-hidden border-highlight-light border-solid border-2"
+      className="w-full xl:w-1/3 h-full xl:h-fit xl:rounded-lg overflow-hidden text-primary-text dark:text-dark-text bg-primary-bg dark:bg-dark-accent border-highlight-light dark:border-0 dark:drop-shadow-2xl border-0 xl:border-solid xl:border-2"
     >
-      <div className="header font-bold text-lg text-highlight bg-highlight-light py-3 px-4">
+      <div className="header font-bold text-lg text-highlight dark:text-primary-bg bg-highlight-light dark:bg-dark-accent-bg py-3 px-4">
         Field Builder
       </div>
       <div className="content w-full flex flex-col py-8 px-12 gap-8 text-base">
@@ -164,9 +164,9 @@ const FieldBuilder = () => {
           );
         })}
 
-        <div className="w-full flex flex-row">
-          <div className="w-1/4"></div>
-          <div className="w-3/4">
+        <div className="w-full flex flex-row ">
+          <div className="hidden xl:block xl:ml-3 xl:w-1/4"></div>
+          <div className="w-full xl:w-3/4">
             <Button
               type="submit"
               ariaLabel="Save Changes"

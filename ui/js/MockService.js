@@ -28,7 +28,7 @@ var FieldService = {
   saveField: async function (fieldJson) {
     try {
       const response = await fetch(
-        "https://www.mocky.io/v2/566061f21200008e3aabd919",
+        "https://quickbase-ui-interview.free.beeceptor.com/test",
         {
           method: "POST",
           headers: {
