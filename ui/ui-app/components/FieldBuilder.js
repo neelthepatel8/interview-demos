@@ -38,7 +38,14 @@ const FieldBuilder = () => {
   const handleSave = (e) => {
     e.preventDefault();
 
-    validateForm();
+    if (!validateForm()) {
+      setNotificationBar({
+        show: true,
+        message: "The form still has some errors, please fix before saving.",
+        styles: "bg-red-200 text-red-500",
+      });
+      return;
+    }
 
     const notifications = [];
 
@@ -82,14 +89,7 @@ const FieldBuilder = () => {
       scheduleNotifications(notifications, setNotificationBar);
 
       FieldService.saveField(state);
-      return;
     }
-
-    setNotificationBar({
-      show: true,
-      message: "The form still has some errors, please fix before saving.",
-      styles: "bg-red-200 text-red-500",
-    });
   };
 
   const handleCancel = (e) => {

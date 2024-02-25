@@ -1,6 +1,8 @@
 import { useReducer, useState } from "react";
 import { REDUCER_ACTIONS } from "./hookConstants";
 import { validateInput } from "@/validations/validateInput";
+import { getCookie, setCookie } from "@/utils/utils";
+
 function formReducer(state, action) {
   switch (action.type) {
     case REDUCER_ACTIONS.UPDATE_FIELD:
@@ -9,13 +11,17 @@ function formReducer(state, action) {
       return action.initialState;
     case REDUCER_ACTIONS.UPDATE_CHOICES_WITH_DEFAULT:
       if (state.default == "") return state;
-      const updatedChoices = state.choices.includes(state.default)
+      const updatedChoices = state.choices
+        .map((c) => c.toLowerCase())
+        .includes(state.default.toLowerCase())
         ? [...state.choices]
         : [state.default, ...state.choices];
       return { ...state, choices: updatedChoices };
     case REDUCER_ACTIONS.SORT_CHOICES:
-      if (state.displayAlpha) {
-        const sortedChoices = state.choices.sort((a, b) => a.localeCompare(b));
+      if (state.displayAlpha == true && state.choices.length > 1) {
+        const sortedChoices = state.choices.sort(function (a, b) {
+          return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
         return { ...state, choices: sortedChoices };
       }
       return state;
