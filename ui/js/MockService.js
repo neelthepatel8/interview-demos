@@ -1,3 +1,4 @@
+import { MOCK_API } from "./config";
 var FieldService = {
   getDefaults: function () {
     return {
@@ -27,16 +28,13 @@ var FieldService = {
   },
   saveField: async function (fieldJson) {
     try {
-      const response = await fetch(
-        "https://quickbase-ui-interview.free.beeceptor.com/test",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(fieldJson),
-        }
-      );
+      const response = await fetch(MOCK_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fieldJson),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

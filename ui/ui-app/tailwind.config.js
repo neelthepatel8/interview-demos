@@ -1,5 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  purge: {
+    enabled: process.env.NODE_ENV === "production",
+    mode: "all",
+    preserveHtmlElements: false,
+    safeList: [
+      "highlight",
+      "highlight-light",
+      "success-button",
+      "cancel-button",
+      "highlight-bg",
+      "highlight-border-light",
+      "highlight-border",
+      "primary-bg",
+      "primary-text",
+      "loading-button",
+      "dark-bg",
+      "dark-accent",
+      "dark-accent-bg",
+      "dark-accent-bg-light",
+      "dark-text",
+      "dark-border",
+      "dark-hightlight-text",
+      "success-button-dark",
+      "cancel-button-dark",
+    ],
+  },
   darkMode: "selector",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",

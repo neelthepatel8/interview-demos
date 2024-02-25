@@ -59,14 +59,14 @@ const FieldBuilder = () => {
         notifications.push({
           message: "Added default value to the choices list.",
           styles: "bg-blue-400 text-white",
-          delay: 3000,
+          delay: 2000,
         });
       }
       if (state.displayAlpha == true && state.choices.length > 1) {
         notifications.push({
           message: "Sorted choices alphabetically.",
           styles: "bg-blue-400 text-white",
-          delay: 3000,
+          delay: 2000,
         });
       }
 
@@ -77,12 +77,12 @@ const FieldBuilder = () => {
         {
           message: "Saving Data...",
           styles: "bg-yellow-500 text-white",
-          delay: 3000,
+          delay: 2000,
         },
         {
           message: "Data has been saved!",
           styles: "bg-green-500 text-white",
-          delay: 3000,
+          delay: 2000,
         }
       );
 
@@ -167,6 +167,9 @@ const FieldBuilder = () => {
         <div className="w-full flex flex-row ">
           <div className="hidden xl:block xl:ml-3 xl:w-1/4"></div>
           <div className="w-full xl:w-3/4">
+            <button className="hidden bg-success-button text-cancel-button text-primary-bg">
+              a
+            </button>
             <Button
               type="submit"
               ariaLabel="Save Changes"
