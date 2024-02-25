@@ -4,7 +4,7 @@ var FieldService = {
       label: "",
       required: false,
       choices: [],
-      displayAlpha: true,
+      displayAlpha: false,
       default: "",
     };
   },
@@ -26,7 +26,7 @@ var FieldService = {
     };
   },
   saveField: function (fieldJson) {
-    // Add the code here to call the API (or temporarily, just log fieldJson to the console)
+    fetch();
   },
 };
 
