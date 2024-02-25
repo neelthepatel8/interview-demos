@@ -8,7 +8,7 @@ const FBCheckboxInput = ({
   ...props
 }) => {
   return (
-    <div className="w-2/3 flex flex-row items-center justify-between">
+    <div className="w-full flex flex-row items-center justify-between">
       {title && <label>{title}</label>}
       <div className="flex flex-row items-center gap-2">
         <input

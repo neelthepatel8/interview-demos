@@ -27,7 +27,7 @@
   {
     "label": "Order",
     "type": "select",
-    "valuekey": "order",
-    "options": ["Alphabetical", "Custom"]
+    "valuekey": "displayAlpha",
+    "options": ["Alphabetical", "As Entered"]
   }
 ]

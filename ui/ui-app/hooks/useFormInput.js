@@ -1,6 +1,6 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { REDUCER_ACTIONS } from "./hookConstants";
-
+import { validateInput } from "@/validations/validateInput";
 function formReducer(state, action) {
   switch (action.type) {
     case REDUCER_ACTIONS.UPDATE_FIELD:
@@ -11,16 +11,22 @@ function formReducer(state, action) {
       return state;
   }
 }
-
-export const useFormInput = (initialState) => {
+export const useFormInput = (initialState, validate) => {
   const [state, dispatch] = useReducer(formReducer, initialState);
+  const [errors, setErrors] = useState({});
 
   const handleFieldChange = (field, value) => {
+    if (validate) {
+      const errors = validateInput(field, value);
+      setErrors(errors);
+    }
     dispatch({ type: REDUCER_ACTIONS.UPDATE_FIELD, field, value });
   };
+
   const handleReset = () => {
     dispatch({ type: REDUCER_ACTIONS.RESET_FIELD, initialState });
+    setErrors({});
   };
 
-  return [state, handleFieldChange, handleReset];
+  return [state, handleFieldChange, handleReset, errors];
 };
