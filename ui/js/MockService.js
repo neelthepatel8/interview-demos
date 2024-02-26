@@ -36,6 +36,8 @@ var FieldService = {
         body: JSON.stringify(fieldJson),
       });
 
+      console.log("Posted field:", fieldJson);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
