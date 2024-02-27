@@ -43,7 +43,6 @@ var FieldService = {
       }
 
       const data = await response.json();
-      console.log("Response data:", data);
       return data;
     } catch (error) {
       console.error("Error saving field:", error);

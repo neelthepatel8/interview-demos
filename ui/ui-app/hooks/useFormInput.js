@@ -11,6 +11,7 @@ function formReducer(state, action) {
       return action.initialState;
     case REDUCER_ACTIONS.UPDATE_CHOICES_WITH_DEFAULT:
       if (state.default == "") return state;
+
       const updatedChoices = state.choices
         .map((c) => c.toLowerCase())
         .includes(state.default.toLowerCase())

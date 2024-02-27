@@ -50,12 +50,21 @@ const FieldBuilder = () => {
     const alerts = [];
 
     if (errors.errorCount === 0) {
-      const defaultInChoices = state.choices.includes(state.default);
-      if (
-        !defaultInChoices &&
-        state.choices.length > 0 &&
-        state.default !== ""
-      ) {
+      const defaultInChoices =
+        state.choices.filter(
+          (c) => c.toLowerCase() === state.default.toLowerCase()
+        ).length > 0;
+      if (!defaultInChoices && state.default !== "") {
+        if (state.choices.length >= 50) {
+          alerts.push({
+            message:
+              "Cannot add default value to the choices list, list is full. (50 max)",
+            styles: "bg-red-400 text-white",
+            delay: 750,
+          });
+          schedulealerts(alerts, setalertBar);
+          return;
+        }
         alerts.push({
           message: "Added default value to the choices list.",
           styles: "bg-blue-400 text-white",
@@ -109,10 +118,10 @@ const FieldBuilder = () => {
       onSubmit={handleSave}
       className="w-full xl:w-1/3 h-full xl:h-fit xl:rounded-lg overflow-hidden text-primary-text dark:text-dark-text bg-primary-bg dark:bg-dark-accent border-highlight-light dark:border-0 dark:drop-shadow-2xl border-0 xl:border-solid xl:border-2"
     >
-      <div className="header font-bold text-lg text-highlight dark:text-primary-bg bg-highlight-light dark:bg-dark-accent-bg py-3 px-4">
+      <div className="font-bold text-lg text-highlight dark:text-primary-bg bg-highlight-light dark:bg-dark-accent-bg py-3 px-4">
         Field Builder
       </div>
-      <div className="content w-full flex flex-col py-8 px-12 gap-8 text-base">
+      <div className="w-full flex flex-col py-8 px-12 gap-8 text-base">
         {alertBar.show && (
           <div
             className={`w-full text-md py-2 px-5 rounded ${alertBar.styles}`}
